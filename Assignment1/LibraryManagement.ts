@@ -62,3 +62,85 @@ class Guest extends LibraryManagement {
         console.log(`${book} returned to the library`);
     }
 }
+
+
+class Book {
+    name: string;
+    noInStock: number;
+
+    constructor(name: string, noInStock: number) {
+        this.name = name;
+        this.noInStock = noInStock;
+    }
+}
+
+class Member {
+    name: string;
+    borrowedBooks: Book[] = [];
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    borrowBook(book: Book) {
+        if (!this.borrowedBooks.includes(book)) {
+            if (book.noInStock > 0) {
+                this.borrowedBooks.push(book);
+                book.noInStock--;
+            }
+
+            console.log(`${book.name} borrowed by ${this.name}, now available in stock: ${book.noInStock}`);
+        } else {
+            console.log(`${book.name} is already borrowed by ${this.name}. Cannot borrow again.`);
+        }
+    }
+    returnBook(book: Book) {
+        const index = this.borrowedBooks.indexOf(book);
+        if (index !== -1) {
+            this.borrowedBooks.splice(index, 1);
+            book.noInStock++;
+            console.log(`${book.name} returned by ${this.name}, now available in stock: ${book.noInStock}`);
+        } else {
+            console.log(`${book.name} was not borrowed by ${this.name}`);
+        }
+    }
+}
+
+class Libz {
+    books: Book[] = [];
+
+    addBook(book: Book) {
+        this.books.push(book);
+    }
+
+    showAvailableBooks() {
+        // this.books.forEach((book) => {
+        //   if (book.isAvailable) {
+        //     console.log(book);
+        //   }
+        // });
+    }
+}
+
+const book1 = new Book("To Kill a Mockingbird", 5);
+const book2 = new Book("1984", 9);
+const book3 = new Book("The Great Gatsby", 6);
+const book4 = new Book("Moby Dick", 10);
+
+const lib2 = new Libz();
+lib2.addBook(book1);
+lib2.addBook(book2);
+// lib2.showAvailableBooks()
+
+const dayo = new Member("Dayo");
+dayo.borrowBook(book1);
+dayo.borrowBook(book1);
+
+const jane = new Member("Jane");
+jane.borrowBook(book1);
+jane.returnBook(book2);
+console.log(dayo.borrowedBooks);
+jane.borrowBook(book2);
+console.log(jane.borrowedBooks);
+
+// console.log(dayo.borrowedBooks);

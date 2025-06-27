@@ -4,7 +4,7 @@ class ArrayAccolades {
         this.array = array;
     }
 
-    
+
     // 1 includes(): Determines whether an array includes a certain element, returning true or false as appropriate
     includes(k: any): boolean {
         for (let i = 0; i < this.array.length; i++) {
@@ -131,13 +131,26 @@ class ArrayAccolades {
 
 const arr = new ArrayAccolades([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 arr.includes(5);
-arr.indexOf(3); 
-arr.lastIndexOf(3); 
-arr.find((value) => value > 5); 
-arr.filter((value) => value > 5); 
-arr.push(10); 
-arr.pop(); 
-arr.shift(); 
+arr.indexOf(3);
+arr.lastIndexOf(3);
+arr.find((value) => value > 5);
+arr.filter((value) => value > 5);
+arr.push(10);
+arr.pop();
+arr.shift();
 arr.unshift(0);
-arr.unshift(-1, -2, 0); 
+arr.unshift(-1, -2, 0);
 arr.concat([11, 12, 13]);
+
+
+const lengthArray = (elements: any | string) => {
+    let counter = 0;
+    for (let element of elements) {
+        if (element !== undefined) {
+            counter++;
+        }
+    }
+    return counter
+}
+
+console.log(lengthArray([1, 2, 3, "s", 4])); 

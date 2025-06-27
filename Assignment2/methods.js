@@ -118,3 +118,13 @@ arr.shift();
 arr.unshift(0);
 arr.unshift(-1, -2, 0);
 arr.concat([11, 12, 13]);
+const lengthArray = (elements) => {
+    let counter = 0;
+    for (let element of elements) {
+        if (element !== undefined) {
+            counter++;
+        }
+    }
+    return counter;
+};
+console.log(lengthArray([1, 2, 3, "s", 4]));
